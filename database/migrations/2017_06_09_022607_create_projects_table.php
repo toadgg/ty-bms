@@ -19,7 +19,7 @@ class CreateProjectsTable extends Migration
             $table->string('developer')->nullable();
             $table->string('contractor')->nullable();
             $table->string('build_area')->nullable();
-            $table->decimal('contract_money', 12)->default(0);
+            $table->decimal('contract_money', 12)->nullable();
             $table->string('manager')->nullable();
             $table->string('status')->nullable();
             $table->string('type')->nullable();
