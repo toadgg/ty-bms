@@ -21,8 +21,8 @@ class CreateContractsTable extends Migration
             $table->text('content');
             $table->tinyInteger('pay_mode');
 
-            $table->decimal('signed_money', 12)->default(0);
-            $table->decimal('advance_payment_amount', 12)->default(0);
+            $table->decimal('signed_money', 12)->nullable();
+            $table->decimal('advance_payment_amount', 12)->nullable();
             $table->tinyInteger('advance_payment_times')->nullable();
             $table->tinyInteger('progress_payment_pct')->nullable();
 
