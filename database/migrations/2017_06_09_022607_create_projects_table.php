@@ -29,6 +29,7 @@ class CreateProjectsTable extends Migration
             $table->enum('visible', ['on', 'off'])->default('on');
             $table->string('sync_from')->nullable();
             $table->string('sync_pk')->nullable();
+
             $table->timestamp('sync_at')->nullable();
             $table->timestamps();
         });
