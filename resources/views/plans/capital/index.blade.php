@@ -96,7 +96,7 @@
                                 <label>项目名称</label>
                                 <select name="project_id" class="form-control select2" style="width: 100%;">
                                     @foreach($projects as $index=>$project)
-                                        <option value="{{ $project->id }}" @if($project->contract) disabled @endif>{{ $project->name }}</option>
+                                        <option value="{{ $project->id }}" @if(!$project->contract) disabled @endif>{{ $project->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
