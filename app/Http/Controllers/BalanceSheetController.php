@@ -62,7 +62,6 @@ class BalanceSheetController extends Controller
                 $total_pay_times += $output->timesBefore($calendar['current']);
             }
 
-            $total_output_value = $project->capitalPlans->sum('payment_amount');
             $advance_payment_amount = $project->contract->advance_payment_amount;
             $progress_payment_pct = $project->contract->progress_payment_pct;
             $current_month_receivable = $last_month_output_value * $progress_payment_pct / 100;
