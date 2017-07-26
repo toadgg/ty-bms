@@ -71,7 +71,7 @@ class BalanceSheetController extends Controller
             $advance_payment_times = $project->contract->getOriginal('advance_payment_times');
             if (is_null($advance_payment_times)) {
                 $advance_payment_deducted = $advance_payment_amount * ($total_output_value / $signed_money);
-            } else if ($advance_payment_times >= $total_pay_times || $advance_payment_times == 0) {
+            } else if ($total_pay_times >= $advance_payment_times || $advance_payment_times == 0) {
                 $advance_payment_deducted = $advance_payment_amount;
             } else {
                 $advance_payment_deducted = $total_pay_times / $advance_payment_times * $advance_payment_amount;
