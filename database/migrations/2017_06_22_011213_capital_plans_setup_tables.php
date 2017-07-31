@@ -46,7 +46,7 @@ class CapitalPlansSetupTables extends Migration
             $table->string('pay_to')->nullable();
             $table->string('info')->nullable();
             $table->decimal('contract_amount', 12)->default(0);
-            $table->tinyInteger('pay_mode')->default(0);
+            $table->string('pay_mode')->nullable();
             $table->decimal('completed_amount', 12)->default(0);
             $table->decimal('payable_in_contract', 12)->default(0);
             $table->decimal('paid_in_contract', 12)->default(0);

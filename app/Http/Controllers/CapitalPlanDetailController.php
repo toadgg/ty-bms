@@ -13,7 +13,7 @@ use Yajra\Datatables\Datatables;
 class CapitalPlanDetailController extends Controller
 {
     protected $rules = [
-        'pay_to' => 'required|exists:nc56.BD_CUBASDOC,CUSTNAME',
+        //'pay_to' => 'required|exists:nc56.BD_CUBASDOC,CUSTNAME',
         'info' => 'required',
         'contract_amount' => 'numeric|nullable',
         'completed_amount' => 'numeric|nullable',

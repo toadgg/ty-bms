@@ -95,10 +95,7 @@
                     { data: 'pay_to' },
                     { data: 'info' },
                     { data: 'contract_amount', render: $.fn.dataTable.render.number( ',', '.', 0, '¥ ' ) },
-                    { data: 'pay_mode', render: function ( data, type, full, meta ) {
-                            return data === 0 ? '按进度' : '按部位';
-                        }
-                    },
+                    { data: 'pay_mode' },
                     { data: 'completed_amount', render: $.fn.dataTable.render.number( ',', '.', 0, '¥ ' ) },
                     { data: 'payable_in_contract', render: $.fn.dataTable.render.number( ',', '.', 0, '¥ ' ) },
                     { data: 'paid_in_contract', render: $.fn.dataTable.render.number( ',', '.', 0, '¥ ' ) },
@@ -127,12 +124,7 @@
                     { name: 'pay_to', label: '分包单位全称' },
                     { name: 'info', label: '供货内容/分包内容' },
                     { name: 'contract_amount', label: '合同金额' },
-                    {
-                        name: 'pay_mode',
-                        label: '付款方式',
-                        type:  "select",
-                        options: [{label: '按进度', value: 0},{label: '按部位', value: 1}]
-                    },
+                    { name: 'pay_mode', label: '付款方式' },
                     { name: 'completed_amount', label: '已完成产值/供货金额' },
                     { name: 'payable_in_contract', label: '按合同已到期应付金额' },
                     { name: 'paid_in_contract', label: '按合同未到期应付金额' },
