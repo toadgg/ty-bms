@@ -29,12 +29,12 @@
                                 <th>结算方式</th>
                                 <th>建设单位</th>
                                 <th>施工单位</th>
-                                <th>合同金额</th>
-                                <th>建筑面积</th>
+                                <th data-class="text-right">合同金额</th>
+                                <th data-class="text-right">建筑面积</th>
                                 <th>开工日期</th>
                                 <th>竣工日期</th>
-                                <th>预付款</th>
-                                <th>进度款</th>
+                                <th data-class="text-right">预付款</th>
+                                <th data-class="text-right">进度款</th>
                                 <th>中标项目经理</th>
                             </tr>
                             </thead>

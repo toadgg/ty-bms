@@ -30,22 +30,22 @@
                             <tr>
                                 <th>ID</th>
                                 <th>项目名称</th>
-                                <th>合同金额</th>
-                                <th>预付款</th>
-                                <th>付款比例</th>
+                                <th data-class="text-right">合同金额</th>
+                                <th data-class="text-right">预付款</th>
+                                <th data-class="text-right">付款比例</th>
                                 <th>付款方式</th>
                                 <th>预付款扣除规则</th>
-                                <th>建筑面积(㎡)</th>
-                                <th>已完总产值</th>
-                                <th>{{ $calendar['prev']->month }}月完成产值</th>
-                                <th>本月应收金额</th>
-                                <th>累计应收总金额</th>
-                                <th>已扣预付款</th>
-                                <th>已收工程款</th>
-                                <th>欠款总金额</th>
-                                <th>实际可收取工程款</th>
-                                <th>计划支出</th>
-                                <th>{{ $calendar['prev']->month }}月已收取工程款</th>
+                                <th data-class="text-right">建筑面积(㎡)</th>
+                                <th data-class="text-right">已完总产值</th>
+                                <th data-class="text-right">{{ $calendar['prev']->month }}月完成产值</th>
+                                <th data-class="text-right">本月应收金额</th>
+                                <th data-class="text-right">累计应收总金额</th>
+                                <th data-class="text-right">已扣预付款</th>
+                                <th data-class="text-right">已收工程款</th>
+                                <th data-class="text-right">欠款总金额</th>
+                                <th data-class="text-right">实际可收取工程款</th>
+                                <th data-class="text-right">计划支出</th>
+                                <th data-class="text-right">{{ $calendar['prev']->month }}月已收取工程款</th>
                                 <th>主管领导</th>
                             </tr>
                             </thead>

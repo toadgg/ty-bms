@@ -28,14 +28,14 @@
                                 <th>ID</th>
                                 <th>分包单位全称</th>
                                 <th>供货内容/分包内容</th>
-                                <th>合同金额</th>
+                                <th data-class="text-right">合同金额</th>
                                 <th>付款方式</th>
-                                <th>已完成产值/供货金额</th>
-                                <th>按合同已到期应付金额</th>
-                                <th>按合同未到期应付金额</th>
-                                <th>累计已付金额</th>
-                                <th>本月计划支付金额</th>
-                                <th>实付金额</th>
+                                <th data-class="text-right">已完成产值/供货金额</th>
+                                <th data-class="text-right">按合同已到期应付金额</th>
+                                <th data-class="text-right">按合同未到期应付金额</th>
+                                <th data-class="text-right">累计已付金额</th>
+                                <th data-class="text-right">本月计划支付金额</th>
+                                <th data-class="text-right">实付金额</th>
                                 <th>备注</th>
                                 <th>操作</th>
                             </tr>
@@ -53,6 +53,20 @@
 @push('css')
     <link rel="stylesheet" href="{{ asset('/adminlte/plugins/datatables/extensions/Editor/css/editor.bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/adminlte/plugins/datatables/extensions/FixedColumns/css/fixedColumns.bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/adminlte/plugins/datatables/extensions/KeyTable/css/keyTable.bootstrap.min.css') }}">
+    <style>
+        div.DTE_Inline input {
+            border: none;
+            background-color: transparent;
+            padding: 0 !important;
+            font-size: 90%;
+        }
+
+        div.DTE_Inline input:focus {
+            outline: none;
+            background-color: transparent;
+        }
+    </style>
 @endpush
 
 @push('js')
@@ -63,6 +77,7 @@
     <script src="{{ asset('/adminlte/plugins/input-mask/jquery.inputmask.min.js') }}"></script>
 
     <script src="{{ asset('/adminlte/plugins/datatables/extensions/FixedColumns/js/dataTables.fixedColumns.min.js') }}"></script>
+    <script src="{{ asset('/adminlte/plugins/datatables/extensions/KeyTable/js/dataTables.keyTable.min.js') }}"></script>
 
     <script src="{{ asset('/adminlte/plugins/datatables/extensions/Editor/js/dataTables.editor.min.js') }}"></script>
     <script src="{{ asset('/adminlte/plugins/datatables/extensions/Editor/js/editor.bootstrap.min.js') }}"></script>
@@ -70,47 +85,7 @@
     <script>
         var editor;
         $(document).ready(function(){
-            $.fn.dataTable.ext.errMode = 'none';
-            $.fn.dataTable.defaults.buttons.unshift(
-                {
-                    text: '',
-                    className: 'fa fa-plus',
-                    action: function () {
-                        editor.create( {
-                            title: '新建资金计划明细',
-                            buttons: '创建'
-                        })
-                    }
-                }
-            );
-            var table = $('#tyTable').DataTable({
-                select: {style: 'os', items: 'cell', info: false},
-                ajax: "{{ route('plans.capital.details.index', [$plan->id, $category->id]) }}",
-                fixedColumns: {
-                    leftColumns: 3,
-                    rightColumns: 1
-                },
-                columns: [
-                    { data: 'id', searchable: false },
-                    { data: 'pay_to' },
-                    { data: 'info' },
-                    { data: 'contract_amount', render: $.fn.dataTable.render.number( ',', '.', 0, '¥ ' ) },
-                    { data: 'pay_mode' },
-                    { data: 'completed_amount', render: $.fn.dataTable.render.number( ',', '.', 0, '¥ ' ) },
-                    { data: 'payable_in_contract', render: $.fn.dataTable.render.number( ',', '.', 0, '¥ ' ) },
-                    { data: 'paid_in_contract', render: $.fn.dataTable.render.number( ',', '.', 0, '¥ ' ) },
-                    { data: 'paid_in_contract_amount', render: $.fn.dataTable.render.number( ',', '.', 0, '¥ ' ) },
-                    { data: 'payable_in_plan', render: $.fn.dataTable.render.number( ',', '.', 0, '¥ ' ) },
-                    { data: 'paid_in_plan', render: $.fn.dataTable.render.number( ',', '.', 0, '¥ ' ) },
-                    { data: 'remark' },
-                    { data: null, orderable: false, className: "center",
-                        defaultContent: '<div class="">' +
-                                            '<a href="" class="editor_edit btn btn-xs btn-default"><span class="fa fa-fw fa-pencil"></span></a> ' +
-                                            '<a href="" class="editor_remove btn btn-xs btn-default"><span class="fa fa-fw fa-trash"></span></a>' +
-                                        '</div>'
-                    },
-                ]
-            });
+
             editor = new $.fn.dataTable.Editor({
                 ajax: {
                     url : "{{ route('plans.capital.details.store', [$plan->id, $category->id]) }}",
@@ -134,6 +109,63 @@
                     { name: 'remark', label: '备注' },
                 ],
             });
+
+            $.fn.dataTable.ext.errMode = 'none';
+            $.fn.dataTable.defaults.buttons.unshift(
+                {
+                    text: '',
+                    className: 'fa fa-plus',
+                    action: function () {
+                        editor.create( {
+                            title: '新建资金计划明细',
+                            buttons: '创建'
+                        })
+                    }
+                }
+            );
+            var table = $('#tyTable').DataTable({
+                keys: {
+                    columns: ':not(:first-child)',
+                    editor:  editor
+                },
+                select: {style: 'os', items: 'cell', info: false},
+                ajax: "{{ route('plans.capital.details.index', [$plan->id, $category->id]) }}",
+                fixedColumns: {
+                    leftColumns: 2,
+                    rightColumns: 1
+                },
+                columns: [
+                    { data: 'id', searchable: false },
+                    { data: 'pay_to' },
+                    { data: 'info' },
+                    { data: 'contract_amount', render: $.fn.dataTable.render.number( ',', '.', 0, '¥ ' ) },
+                    { data: 'pay_mode' },
+                    { data: 'completed_amount', render: $.fn.dataTable.render.number( ',', '.', 0, '¥ ' ) },
+                    { data: 'payable_in_contract', render: $.fn.dataTable.render.number( ',', '.', 0, '¥ ' ) },
+                    { data: 'paid_in_contract', render: $.fn.dataTable.render.number( ',', '.', 0, '¥ ' ) },
+                    { data: 'paid_in_contract_amount', render: $.fn.dataTable.render.number( ',', '.', 0, '¥ ' ) },
+                    { data: 'payable_in_plan', render: $.fn.dataTable.render.number( ',', '.', 0, '¥ ' ) },
+                    { data: 'paid_in_plan', render: $.fn.dataTable.render.number( ',', '.', 0, '¥ ' ) },
+                    { data: 'remark' },
+                    { data: null, orderable: false, className: "center",
+                        defaultContent: '<div class="">' +
+                                            '<a href="" class="editor_edit btn btn-xs btn-default"><span class="fa fa-fw fa-pencil"></span></a> ' +
+                                            '<a href="" class="editor_remove btn btn-xs btn-default"><span class="fa fa-fw fa-trash"></span></a>' +
+                                        '</div>'
+                    },
+                ]
+            });
+
+
+            editor
+                .on( 'open', function ( e, mode, action ) {
+                    if ( mode === 'main' ) {
+                        table.keys.disable();
+                    }
+                })
+                .on( 'close', function () {
+                    table.keys.enable();
+                });
 
             // Edit record
             table.on('click', 'a.editor_edit', function (e) {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CapitalPlanDetail;
 use App\Category;
 use Carbon\Carbon;
 use DateTime;
@@ -45,11 +46,22 @@ class CapitalPlanController extends Controller
     {
         $inputs = $request->only(['project_id', 'plate_id', 'calendar']);
 
+
         $inputs['calendar'] = Carbon::createFromFormat('mY', $inputs['calendar'])->lastOfMonth();
 
         $exists = CapitalPlan::where($inputs)->exists();
         if (!$exists) {
-            CapitalPlan::create($inputs);
+            $perCalendar = Carbon::createFromFormat('mY', $request->get('calendar'))->modify('-1 months')->lastOfMonth();
+            $plan = CapitalPlan::create($inputs);
+            $perCapitalPlanDetails = CapitalPlan::where([
+                'project_id' => $inputs['project_id'],
+                'plate_id' => $inputs['plate_id'],
+                'calendar' => $perCalendar
+            ])->first()->details()->get(['category_id', 'pay_to', 'info', 'contract_amount', 'pay_mode'])->toArray();
+            foreach ($perCapitalPlanDetails as $detail) {
+                $detail['capital_plan_id'] = $plan->id;
+                CapitalPlanDetail::create($detail);
+            }
         }
 
         return redirect()->action('CapitalPlanController@index');

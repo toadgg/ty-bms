@@ -27,8 +27,8 @@
                                 <th>id</th>
                                 <th>项目名称</th>
                                 <th>部位名称</th>
-                                <th>部位产值</th>
-                                <th>部位应扣预付款</th>
+                                <th data-class="text-right">部位产值</th>
+                                <th data-class="text-right">部位应扣预付款</th>
                                 <th>部位完成时间</th>
                                 <th>操作</th>
                             </tr>

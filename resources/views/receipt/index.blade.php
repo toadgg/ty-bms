@@ -91,7 +91,7 @@
                                 <th>ID</th>
                                 <th>项目名称</th>
                                 @for($i = 1; $i <= 12; $i++)
-                                    <th data-class-name="currency">{{ $i }}月份</th>
+                                    <th data-class="text-right">{{ $i }}月份</th>
                                 @endfor
                                 <th>操作</th>
                             </tr>

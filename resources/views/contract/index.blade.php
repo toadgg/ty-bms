@@ -27,11 +27,11 @@
                                 <th>合同编码</th>
                                 <th>合同名称</th>
                                 <th>合同类型</th>
-                                <th>签订金额</th>
+                                <th data-class="text-right">签订金额</th>
                                 <th>付款方式</th>
-                                <th>预付金额</th>
+                                <th data-class="text-right">预付金额</th>
                                 <th>预付扣除方式</th>
-                                <th>进度款比例</th>
+                                <th data-class="text-right">进度款比例</th>
                                 <th>签订日期</th>
                             </tr>
                             </thead>
@@ -66,9 +66,6 @@
 
 @push('js')
 <script type="text/javascript">
-    var opts = {
-        //columnDefs : []
-    };
-    $('#tyTable').DataTable(opts);
+    $('#tyTable').DataTable({order: []});
 </script>
 @endpush
